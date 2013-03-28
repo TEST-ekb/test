@@ -204,4 +204,5 @@ class Users extends Simpla
 			return $id;
 		return false;
 	}
+	
 }

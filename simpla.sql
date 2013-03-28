@@ -2,7 +2,7 @@
 DROP TABLE IF EXISTS `s_blog`;
 
 CREATE TABLE `s_blog` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(500) NOT NULL,
   `url` varchar(255) NOT NULL,
   `meta_title` varchar(500) NOT NULL,
@@ -10,9 +10,9 @@ CREATE TABLE `s_blog` (
   `meta_description` varchar(500) NOT NULL,
   `annotation` text NOT NULL,
   `text` longtext NOT NULL,
-  `visible` tinyint(1) NOT NULL default '0',
-  `date` timestamp NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (`id`),
+  `visible` tinyint(1) NOT NULL DEFAULT '0',
+  `date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
   KEY `enabled` (`visible`),
   KEY `url` (`url`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -25,15 +25,15 @@ insert into `s_blog` values
 DROP TABLE IF EXISTS `s_brands`;
 
 CREATE TABLE `s_brands` (
-  `id` int(11) NOT NULL auto_increment,
-  `name` varchar(255) NOT NULL default '',
-  `url` varchar(255) NOT NULL default '',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `url` varchar(255) NOT NULL DEFAULT '',
   `meta_title` varchar(500) NOT NULL,
   `meta_keywords` varchar(500) NOT NULL,
   `meta_description` varchar(500) NOT NULL,
   `description` text NOT NULL,
   `image` varchar(255) NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   KEY `name` (`name`),
   KEY `url` (`url`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
@@ -56,19 +56,19 @@ insert into `s_brands` values
 DROP TABLE IF EXISTS `s_categories`;
 
 CREATE TABLE `s_categories` (
-  `id` int(11) NOT NULL auto_increment,
-  `parent_id` int(11) NOT NULL default '0',
-  `name` varchar(255) NOT NULL default '',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(255) NOT NULL DEFAULT '',
   `meta_title` varchar(255) NOT NULL,
   `meta_keywords` varchar(255) NOT NULL,
   `meta_description` varchar(255) NOT NULL,
   `description` text NOT NULL,
-  `url` varchar(255) NOT NULL default '',
-  `image` varchar(255) NOT NULL default '',
-  `position` int(11) NOT NULL default '0',
-  `visible` tinyint(1) NOT NULL default '1',
+  `url` varchar(255) NOT NULL DEFAULT '',
+  `image` varchar(255) NOT NULL DEFAULT '',
+  `position` int(11) NOT NULL DEFAULT '0',
+  `visible` tinyint(1) NOT NULL DEFAULT '1',
   `external_id` varchar(36) NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   KEY `url` (`url`),
   KEY `parent_id` (`parent_id`),
   KEY `position` (`position`),
@@ -90,7 +90,7 @@ DROP TABLE IF EXISTS `s_categories_features`;
 CREATE TABLE `s_categories_features` (
   `category_id` int(11) NOT NULL,
   `feature_id` int(11) NOT NULL,
-  PRIMARY KEY  (`category_id`,`feature_id`)
+  PRIMARY KEY (`category_id`,`feature_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /* dumping data for table `s_categories_features` */
@@ -259,15 +259,15 @@ insert into `s_categories_features` values
 DROP TABLE IF EXISTS `s_comments`;
 
 CREATE TABLE `s_comments` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `date` datetime NOT NULL default '0000-00-00 00:00:00',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `ip` varchar(20) NOT NULL,
-  `object_id` int(11) NOT NULL default '0',
+  `object_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) NOT NULL,
   `text` text NOT NULL,
   `type` enum('product','blog') NOT NULL,
-  `approved` int(1) NOT NULL default '0',
-  PRIMARY KEY  (`id`),
+  `approved` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
   KEY `product_id` (`object_id`),
   KEY `type` (`type`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
@@ -282,15 +282,15 @@ insert into `s_comments` values
 DROP TABLE IF EXISTS `s_coupons`;
 
 CREATE TABLE `s_coupons` (
-  `id` bigint(20) NOT NULL auto_increment,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `code` varchar(256) NOT NULL,
-  `expire` timestamp NULL default NULL,
-  `type` enum('absolute','percentage') NOT NULL default 'absolute',
+  `expire` timestamp NULL DEFAULT NULL,
+  `type` enum('absolute','percentage') NOT NULL DEFAULT 'absolute',
   `value` float(10,2) NOT NULL,
-  `min_order_price` float(10,2) default NULL,
-  `single` int(1) NOT NULL default '0',
-  `usages` int(11) NOT NULL default '0',
-  PRIMARY KEY  (`id`)
+  `min_order_price` float(10,2) DEFAULT NULL,
+  `single` int(1) NOT NULL DEFAULT '0',
+  `usages` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 /* dumping data for table `s_coupons` */
@@ -303,16 +303,16 @@ insert into `s_coupons` values
 DROP TABLE IF EXISTS `s_currencies`;
 
 CREATE TABLE `s_currencies` (
-  `id` int(11) NOT NULL auto_increment,
-  `name` varchar(255) NOT NULL default '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL DEFAULT '0',
   `sign` varchar(20) NOT NULL,
-  `code` char(3) NOT NULL default '',
-  `rate_from` float(10,2) NOT NULL default '1.00',
-  `rate_to` float(10,2) NOT NULL default '1.00',
-  `cents` int(1) NOT NULL default '2',
+  `code` char(3) NOT NULL DEFAULT '',
+  `rate_from` float(10,2) NOT NULL DEFAULT '1.00',
+  `rate_to` float(10,2) NOT NULL DEFAULT '1.00',
+  `cents` int(1) NOT NULL DEFAULT '2',
   `position` int(11) NOT NULL,
   `enabled` int(1) NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   KEY `position` (`position`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
@@ -326,15 +326,15 @@ insert into `s_currencies` values
 DROP TABLE IF EXISTS `s_delivery`;
 
 CREATE TABLE `s_delivery` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `free_from` float(10,2) NOT NULL,
   `price` float(10,2) NOT NULL,
-  `enabled` tinyint(1) NOT NULL default '0',
+  `enabled` tinyint(1) NOT NULL DEFAULT '0',
   `position` int(11) NOT NULL,
-  `separate_payment` int(1) default '0',
-  PRIMARY KEY  (`id`),
+  `separate_payment` int(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
   KEY `position` (`position`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
@@ -349,7 +349,7 @@ DROP TABLE IF EXISTS `s_delivery_payment`;
 CREATE TABLE `s_delivery_payment` (
   `delivery_id` int(11) NOT NULL,
   `payment_method_id` int(11) NOT NULL,
-  PRIMARY KEY  (`delivery_id`,`payment_method_id`)
+  PRIMARY KEY (`delivery_id`,`payment_method_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Связка способом оплаты и способов доставки';
 
 /* dumping data for table `s_delivery_payment` */
@@ -379,11 +379,11 @@ insert into `s_delivery_payment` values
 DROP TABLE IF EXISTS `s_features`;
 
 CREATE TABLE `s_features` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `position` int(11) NOT NULL,
   `in_filter` int(1) NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   KEY `position` (`position`),
   KEY `in_filter` (`in_filter`)
 ) ENGINE=MyISAM AUTO_INCREMENT=149 DEFAULT CHARSET=utf8;
@@ -543,13 +543,13 @@ insert into `s_features` values
 DROP TABLE IF EXISTS `s_feedbacks`;
 
 CREATE TABLE `s_feedbacks` (
-  `id` bigint(20) NOT NULL auto_increment,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `date` datetime NOT NULL,
   `ip` varchar(20) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `message` text NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
@@ -557,10 +557,10 @@ CREATE TABLE `s_feedbacks` (
 DROP TABLE IF EXISTS `s_groups`;
 
 CREATE TABLE `s_groups` (
-  `id` int(11) NOT NULL auto_increment,
-  `name` varchar(255) NOT NULL default '',
-  `discount` float(5,2) NOT NULL default '0.00',
-  PRIMARY KEY  (`id`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `discount` float(5,2) NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /* dumping data for table `s_groups` */
@@ -571,12 +571,12 @@ insert into `s_groups` values
 DROP TABLE IF EXISTS `s_images`;
 
 CREATE TABLE `s_images` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `product_id` int(11) NOT NULL default '0',
-  `filename` varchar(255) NOT NULL default '',
+  `product_id` int(11) NOT NULL DEFAULT '0',
+  `filename` varchar(255) NOT NULL DEFAULT '',
   `position` int(11) NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   KEY `filename` (`filename`),
   KEY `product_id` (`product_id`),
   KEY `position` (`position`)
@@ -661,14 +661,30 @@ insert into `s_images` values
 (110,'',41,'Canon-PowerShot-A3200-IS-Orange.jpg',0),
 (112,'',42,'IXUS-1000 HS BROWN.jpg',0);
 
+/* Table structure for table `s_labels` */
+DROP TABLE IF EXISTS `s_labels`;
+
+CREATE TABLE `s_labels` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `color` varchar(6) NOT NULL,
+  `position` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+/* dumping data for table `s_labels` */
+insert into `s_labels` values
+(4,'перезвонить','ff00ff',4),
+(5,'ожидается товар','00d5fa',5);
+
 /* Table structure for table `s_menu` */
 DROP TABLE IF EXISTS `s_menu`;
 
 CREATE TABLE `s_menu` (
-  `id` int(11) NOT NULL default '0',
-  `name` varchar(255) NOT NULL default '',
+  `id` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(255) NOT NULL DEFAULT '',
   `position` int(11) NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /* dumping data for table `s_menu` */
@@ -683,7 +699,7 @@ CREATE TABLE `s_options` (
   `product_id` int(11) NOT NULL,
   `feature_id` int(11) NOT NULL,
   `value` varchar(1024) NOT NULL,
-  PRIMARY KEY  (`product_id`,`feature_id`),
+  PRIMARY KEY (`product_id`,`feature_id`),
   KEY `value` (`value`(333)),
   KEY `product_id` (`product_id`),
   KEY `feature_id` (`feature_id`)
@@ -1801,22 +1817,22 @@ insert into `s_options` values
 DROP TABLE IF EXISTS `s_orders`;
 
 CREATE TABLE `s_orders` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `delivery_id` int(11) default NULL,
-  `delivery_price` float(10,2) NOT NULL default '0.00',
-  `payment_method_id` int(11) default NULL,
-  `paid` int(1) NOT NULL default '0',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `delivery_id` int(11) DEFAULT NULL,
+  `delivery_price` float(10,2) NOT NULL DEFAULT '0.00',
+  `payment_method_id` int(11) DEFAULT NULL,
+  `paid` int(1) NOT NULL DEFAULT '0',
   `payment_date` datetime NOT NULL,
   `closed` tinyint(1) NOT NULL,
-  `date` datetime default NULL,
-  `user_id` int(11) default '0',
-  `name` varchar(255) NOT NULL default '',
-  `address` varchar(255) NOT NULL default '',
-  `phone` varchar(255) NOT NULL default '',
+  `date` datetime DEFAULT NULL,
+  `user_id` int(11) DEFAULT '0',
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `address` varchar(255) NOT NULL DEFAULT '',
+  `phone` varchar(255) NOT NULL DEFAULT '',
   `email` varchar(255) NOT NULL,
   `comment` varchar(1024) NOT NULL,
-  `status` int(11) NOT NULL default '0',
-  `url` varchar(255) default NULL,
+  `status` int(11) NOT NULL DEFAULT '0',
+  `url` varchar(255) DEFAULT NULL,
   `payment_details` text NOT NULL,
   `ip` varchar(15) NOT NULL,
   `total_price` float(10,2) NOT NULL,
@@ -1824,9 +1840,9 @@ CREATE TABLE `s_orders` (
   `discount` float(5,2) NOT NULL,
   `coupon_discount` float(10,2) NOT NULL,
   `coupon_code` varchar(255) NOT NULL,
-  `separate_delivery` int(1) NOT NULL default '0',
-  `modified` timestamp NOT NULL default CURRENT_TIMESTAMP,
-  PRIMARY KEY  (`id`),
+  `separate_delivery` int(1) NOT NULL DEFAULT '0',
+  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
   KEY `login` (`user_id`),
   KEY `written_off` (`closed`),
   KEY `date` (`date`),
@@ -1837,25 +1853,40 @@ CREATE TABLE `s_orders` (
 
 /* dumping data for table `s_orders` */
 insert into `s_orders` values
-(1,1,'4.00',0,0,'0000-00-00 00:00:00',0,'2012-05-09 15:27:27',0,'Артемий Иванов','Москва, Шоссе Энтузиастов 56','545-65-34','ai@mail.ru','',0,'3bc6d5763e8fd5a3ec784c8561402498','','','35439.00','','5.00','0.00','',0,'2012-09-02 05:48:22'),
-(2,0,'0.00',0,0,'0000-00-00 00:00:00',0,'2011-11-09 15:29:04',0,'Константин Мельников','Москва, ул. Строителей 3','333-23-23','mmk@yandex.ru','',0,'e30a721505aed9c376595d729b1ab3f1','','','19200.00','','0.00','0.00','',0,'2011-11-09 15:29:20');
+(1,1,'4.00',0,0,'0000-00-00 00:00:00',0,'2012-05-09 15:27:27',0,'Артемий Иванов','Москва, Шоссе Энтузиастов 56','545-65-34','ai@mail.ru','',0,'3bc6d5763e8fd5a3ec784c8561402498','','','35439.00','','5.00','0.00','',0,'2013-03-27 12:51:06'),
+(2,0,'0.00',0,0,'0000-00-00 00:00:00',0,'2011-11-09 15:29:04',0,'Константин Мельников','Москва, ул. Строителей 3','333-23-23','mmk@yandex.ru','',0,'e30a721505aed9c376595d729b1ab3f1','','','19200.00','','0.00','0.00','',0,'2013-03-27 12:51:00');
+
+/* Table structure for table `s_orders_labels` */
+DROP TABLE IF EXISTS `s_orders_labels`;
+
+CREATE TABLE `s_orders_labels` (
+  `order_id` int(11) NOT NULL,
+  `label_id` int(11) NOT NULL,
+  PRIMARY KEY (`order_id`,`label_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+/* dumping data for table `s_orders_labels` */
+insert into `s_orders_labels` values
+(1,4),
+(1,5),
+(2,4);
 
 /* Table structure for table `s_pages` */
 DROP TABLE IF EXISTS `s_pages`;
 
 CREATE TABLE `s_pages` (
-  `id` int(11) NOT NULL auto_increment,
-  `url` varchar(255) NOT NULL default '',
-  `name` varchar(255) NOT NULL default '',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `url` varchar(255) NOT NULL DEFAULT '',
+  `name` varchar(255) NOT NULL DEFAULT '',
   `meta_title` varchar(500) NOT NULL,
   `meta_description` varchar(500) NOT NULL,
   `meta_keywords` varchar(500) NOT NULL,
   `body` longtext NOT NULL,
-  `menu_id` int(11) NOT NULL default '0',
-  `position` int(11) NOT NULL default '0',
-  `visible` tinyint(1) NOT NULL default '0',
+  `menu_id` int(11) NOT NULL DEFAULT '0',
+  `position` int(11) NOT NULL DEFAULT '0',
+  `visible` tinyint(1) NOT NULL DEFAULT '0',
   `header` varchar(1024) NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   KEY `order_num` (`position`),
   KEY `url` (`url`)
 ) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
@@ -1874,15 +1905,15 @@ insert into `s_pages` values
 DROP TABLE IF EXISTS `s_payment_methods`;
 
 CREATE TABLE `s_payment_methods` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `module` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `currency_id` float NOT NULL,
   `settings` text NOT NULL,
-  `enabled` tinyint(1) NOT NULL default '0',
+  `enabled` tinyint(1) NOT NULL DEFAULT '0',
   `position` int(11) NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   KEY `position` (`position`)
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
@@ -1901,21 +1932,21 @@ insert into `s_payment_methods` values
 DROP TABLE IF EXISTS `s_products`;
 
 CREATE TABLE `s_products` (
-  `id` int(11) NOT NULL auto_increment,
-  `url` varchar(255) NOT NULL default '',
-  `brand_id` int(11) default NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `url` varchar(255) NOT NULL DEFAULT '',
+  `brand_id` int(11) DEFAULT NULL,
   `name` varchar(500) NOT NULL,
   `annotation` text NOT NULL,
   `body` longtext NOT NULL,
-  `visible` tinyint(1) NOT NULL default '1',
-  `position` int(11) NOT NULL default '0',
+  `visible` tinyint(1) NOT NULL DEFAULT '1',
+  `position` int(11) NOT NULL DEFAULT '0',
   `meta_title` varchar(500) NOT NULL,
   `meta_keywords` varchar(500) NOT NULL,
   `meta_description` varchar(500) NOT NULL,
-  `created` timestamp NULL default CURRENT_TIMESTAMP,
-  `featured` tinyint(1) default NULL,
+  `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `featured` tinyint(1) DEFAULT NULL,
   `external_id` varchar(36) NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   KEY `url` (`url`),
   KEY `brand_id` (`brand_id`),
   KEY `visible` (`visible`),
@@ -1977,7 +2008,7 @@ CREATE TABLE `s_products_categories` (
   `product_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `position` int(11) NOT NULL,
-  PRIMARY KEY  (`product_id`,`category_id`),
+  PRIMARY KEY (`product_id`,`category_id`),
   KEY `position` (`position`),
   KEY `product_id` (`product_id`),
   KEY `category_id` (`category_id`)
@@ -2032,16 +2063,16 @@ insert into `s_products_categories` values
 DROP TABLE IF EXISTS `s_purchases`;
 
 CREATE TABLE `s_purchases` (
-  `id` int(11) NOT NULL auto_increment,
-  `order_id` int(11) NOT NULL default '0',
-  `product_id` int(11) default '0',
-  `variant_id` int(11) default NULL,
-  `product_name` varchar(255) NOT NULL default '',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL DEFAULT '0',
+  `product_id` int(11) DEFAULT '0',
+  `variant_id` int(11) DEFAULT NULL,
+  `product_name` varchar(255) NOT NULL DEFAULT '',
   `variant_name` varchar(255) NOT NULL,
-  `price` float(10,2) NOT NULL default '0.00',
-  `amount` int(11) NOT NULL default '0',
+  `price` float(10,2) NOT NULL DEFAULT '0.00',
+  `amount` int(11) NOT NULL DEFAULT '0',
   `sku` varchar(255) NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`),
   KEY `product_id` (`product_id`),
   KEY `variant_id` (`variant_id`)
@@ -2060,7 +2091,7 @@ CREATE TABLE `s_related_products` (
   `product_id` int(11) NOT NULL,
   `related_id` int(11) NOT NULL,
   `position` int(11) NOT NULL,
-  PRIMARY KEY  (`product_id`,`related_id`),
+  PRIMARY KEY (`product_id`,`related_id`),
   KEY `position` (`position`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -2094,10 +2125,10 @@ insert into `s_related_products` values
 DROP TABLE IF EXISTS `s_settings`;
 
 CREATE TABLE `s_settings` (
-  `setting_id` int(11) NOT NULL auto_increment,
-  `name` varchar(255) NOT NULL default '',
+  `setting_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL DEFAULT '',
   `value` text NOT NULL,
-  PRIMARY KEY  (`setting_id`)
+  PRIMARY KEY (`setting_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=120 DEFAULT CHARSET=utf8;
 
 /* dumping data for table `s_settings` */
@@ -2129,15 +2160,15 @@ insert into `s_settings` values
 DROP TABLE IF EXISTS `s_users`;
 
 CREATE TABLE `s_users` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL default '',
-  `name` varchar(255) NOT NULL default '',
-  `group_id` int(11) NOT NULL default '0',
-  `enabled` tinyint(1) NOT NULL default '0',
-  `last_ip` varchar(15) default NULL,
-  `created` timestamp NULL default CURRENT_TIMESTAMP,
-  PRIMARY KEY  (`id`),
+  `password` varchar(255) NOT NULL DEFAULT '',
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `group_id` int(11) NOT NULL DEFAULT '0',
+  `enabled` tinyint(1) NOT NULL DEFAULT '0',
+  `last_ip` varchar(15) DEFAULT NULL,
+  `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
   KEY `email` (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -2146,17 +2177,17 @@ CREATE TABLE `s_users` (
 DROP TABLE IF EXISTS `s_variants`;
 
 CREATE TABLE `s_variants` (
-  `id` bigint(20) NOT NULL auto_increment,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `sku` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `price` float(14,2) NOT NULL,
-  `compare_price` float(14,2) default NULL,
-  `stock` mediumint(9) default NULL,
+  `compare_price` float(14,2) DEFAULT NULL,
+  `stock` mediumint(9) DEFAULT NULL,
   `position` int(11) NOT NULL,
   `attachment` varchar(255) NOT NULL,
   `external_id` varchar(36) NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   KEY `product_id` (`product_id`),
   KEY `sku` (`sku`),
   KEY `price` (`price`),

@@ -517,3 +517,4 @@ class Database extends Simpla
 		fwrite($h, "\n");
 	}
 }
+

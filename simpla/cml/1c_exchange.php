@@ -7,7 +7,7 @@ $dir = 'simpla/cml/temp/';
 $brand_option_name = 'Производитель';
 
 $start_time = microtime(true);
-$max_exec_time = @ini_get("max_execution_time");
+$max_exec_time = min(30, @ini_get("max_execution_time"));
 if(empty($max_exec_time))
 	$max_exec_time = 30;
 

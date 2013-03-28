@@ -39,6 +39,9 @@ class ImportAjax extends Simpla
 
 	public function import()
 	{
+		if(!$this->managers->access('import'))
+			return false;
+
 		// Для корректной работы установим локаль UTF-8
 		setlocale(LC_ALL, 'ru_RU.UTF-8');
 		
@@ -237,7 +240,9 @@ class ImportAjax extends Simpla
 		// Если на прошлом шаге товар не нашелся, и задано хотя бы название товара
 		if((empty($product_id) || empty($variant_id)) && isset($item['name']))
 		{
-			if(isset($item['variant']))
+			if(!empty($variant['sku']) && empty($variant['name']))
+				$this->db->query('SELECT v.id as variant_id, p.id as product_id FROM __products p LEFT JOIN __variants v ON v.product_id=p.id WHERE v.sku=? LIMIT 1', $variant['sku']);			
+			elseif(isset($item['variant']))
 				$this->db->query('SELECT v.id as variant_id, p.id as product_id FROM __products p LEFT JOIN __variants v ON v.product_id=p.id AND v.name=? WHERE p.name=? LIMIT 1', $item['variant'], $item['name']);
 			else
 				$this->db->query('SELECT v.id as variant_id, p.id as product_id FROM __products p LEFT JOIN __variants v ON v.product_id=p.id WHERE p.name=? LIMIT 1', $item['name']);			

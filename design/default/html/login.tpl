@@ -1,5 +1,5 @@
 {* Страница входа пользователя *}
-{$meta_title = "Вход на сайт" scope=parent}
+{$meta_title = "Вход" scope=parent}
    
 <h1>Вход</h1>
 

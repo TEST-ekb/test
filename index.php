@@ -8,8 +8,7 @@
  * @author 		Denis Pikusov
  *
  */
-error_reporting(E_ALL); 
- 
+
 // Засекаем время
 $time_start = microtime(true);
 
@@ -18,6 +17,14 @@ session_start();
 require_once('view/IndexView.php');
 
 $view = new IndexView();
+
+
+if(isset($_GET['logout']))
+{
+    header('WWW-Authenticate: Basic realm="Simpla CMS"');
+    header('HTTP/1.0 401 Unauthorized');
+	unset($_SESSION['admin']);
+}
 
 // Если все хорошо
 if(($res = $view->fetch()) !== false)
@@ -29,7 +36,7 @@ if(($res = $view->fetch()) !== false)
 	// Сохраняем последнюю просмотренную страницу в переменной $_SESSION['last_visited_page']
 	if(empty($_SESSION['last_visited_page']) || empty($_SESSION['current_page']) || $_SERVER['REQUEST_URI'] !== $_SESSION['current_page'])
 	{
-		if(!empty($_SESSION['current_page']) && $_SESSION['last_visited_page'] !== $_SESSION['current_page'])
+		if(!empty($_SESSION['current_page']) && !empty($_SESSION['last_visited_page']) && $_SESSION['last_visited_page'] !== $_SESSION['current_page'])
 			$_SESSION['last_visited_page'] = $_SESSION['current_page'];
 		$_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
 	}		
@@ -62,9 +69,12 @@ $l->domains = explode(',', $l->domains);
 
 $h = getenv("HTTP_HOST");
 if(substr($h, 0, 4) == 'www.') $h = substr($h, 4);
+if((!in_array($h, $l->domains) || (strtotime($l->expiration)<time() && $l->expiration!='*')))
+{
+	print "<div style='text-align:center; font-size:22px; height:100px;'>Лицензия недействительна<br><a href='http://simplacms.ru'>Скрипт интернет-магазина Simpla</a></div>";
+}
 
 // Отладочная информация
-echo base64_decode('PGRpdiBzdHlsZT0ncG9zaXRpb246YWJzb2x1dGU7IGxlZnQ6LTk5OTlweDsnPgo8YSBocmVmPSJodHRwOi8vbG92ZWlzLm9yZy51YS8iPtCW0LLQsNGH0LrQsCBMb3ZlIGlzINC60YPQv9C40YLRjDwvYT4KPC9kaXY+');
 if(1)
 {
 	print "<!--\r\n";
