@@ -5,8 +5,8 @@ RewriteEngine on
 
 # Админка теперь по адресу /simpla
 RewriteRule	^admin/?$  simpla [L]
-RewriteRule	^admin/?$  simpla [L]
 
+# Каталог товаров
 # Каталог товаров
 RewriteRule ^catalog/([^/]+)/?$	index.php?module=ProductsView&category=$1 [L,QSA]
 RewriteRule ^catalog/([^/]+)/([^/]+)/?$	index.php?module=ProductsView&category=$1&brand=$2 [L,QSA]
